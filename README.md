@@ -32,9 +32,9 @@ Choose your platform and download the latest version:
 
 | Platform | Download Link |
 |----------|---------------|
-| **Linux** (.deb) | [Download for Linux](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/v1.0/kala-network-tracker_1.0_amd64.deb) |
-| **Windows** (.exe) | [Download for Windows](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/v1.0/Tracker_windows.exe) |
-| **macOS** (binary) | [Download for macOS](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/v1.0/Tracker_macos) |
+| **Linux** (.deb in Zip) | [Download for Linux](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/KalaSecurityProgram/Tracker-ubuntu-latest.zip) |
+| **Windows** (.exe in Zip) | [Download for Windows](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/KalaSecurityProgram/Tracker-windows-latest.zip) |
+| **macOS** (binary in Zip) | [Download for macOS](https://github.com/KalaSecurityProgram/Kala-Network-Tracker/releases/download/KalaSecurityProgram/Tracker-macos-latest.zip) |
 
 ---
 
