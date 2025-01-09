@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: List Files in Repository
+      # Step 2: Debug: List Files in Repository
       - name: Debug: List Files in Repository
         run: |
           echo "Listing all files in the repository:"
@@ -40,15 +40,16 @@ jobs:
       - name: Build Executable
         run: |
           echo "Running PyInstaller..."
-          pyinstaller --onefile --console Tracker.py
+          pyinstaller --onefile --console Tracker.py || exit 1
           echo "Listing contents of the dist/ directory:"
           ls -l dist/ || echo "dist/ directory not found."
 
-      # Step 6: Debug: Check for PyInstaller Errors
-      - name: Debug: Check PyInstaller Logs
+      # Step 6: Debug: Check PyInstaller Logs
+      - name: Debug PyInstaller Logs
         run: |
           echo "Checking PyInstaller logs..."
-          cat *.log || echo "No PyInstaller logs found."
+          cat Tracker.spec || echo "Tracker.spec not found"
+          cat dist/Tracker.log || echo "dist/Tracker.log not found"
 
       # Step 7: Upload Artifacts
       - name: Upload Executable
