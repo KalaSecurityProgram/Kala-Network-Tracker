@@ -18,24 +18,39 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set Up Python Environment
+      # Step 2: List Files in Repository
+      - name: Debug: List Files in Repository
+        run: |
+          echo "Listing all files in the repository:"
+          ls -R
+
+      # Step 3: Set Up Python Environment
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      # Step 3: Install Dependencies
+      # Step 4: Install Dependencies
       - name: Install Dependencies
         run: |
+          echo "Installing dependencies..."
           pip install pyinstaller requests psutil beautifulsoup4
 
-      # Step 4: Build the Executable
+      # Step 5: Build the Executable
       - name: Build Executable
         run: |
+          echo "Running PyInstaller..."
           pyinstaller --onefile --console Tracker.py
-          ls -l dist/  # List contents of the dist directory for debugging
+          echo "Listing contents of the dist/ directory:"
+          ls -l dist/ || echo "dist/ directory not found."
 
-      # Step 5: Upload Artifacts
+      # Step 6: Debug: Check for PyInstaller Errors
+      - name: Debug: Check PyInstaller Logs
+        run: |
+          echo "Checking PyInstaller logs..."
+          cat *.log || echo "No PyInstaller logs found."
+
+      # Step 7: Upload Artifacts
       - name: Upload Executable
         uses: actions/upload-artifact@v3
         with:
