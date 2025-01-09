@@ -1,10 +1,5 @@
-Here’s an example of a **`README.md`** file with direct release links to your executables for Linux, Windows, and macOS:
 
----
 
-### **README.md**
-
-```markdown
 # Kala Network Tracker
 
 ![Kala Network Tracker](https://example.com/banner-image.png)
