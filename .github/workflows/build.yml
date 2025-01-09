@@ -14,30 +14,33 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      # Step 1: Checkout the Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set Up Python Environment
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      # Step 3: Install Dependencies
       - name: Install Dependencies
         run: |
           pip install pyinstaller requests psutil beautifulsoup4
 
-      # Step 4: Build the Executable
       - name: Build Executable
         run: |
-          pyinstaller --onefile --console Tracker.py
-          ls -l dist/  # Debugging: List the contents of the dist directory
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            pyinstaller --onefile --console Tracker.py
+            fpm -s dir -t deb -n kala-network-tracker -v 1.0 dist/Tracker=/usr/bin/kala-tracker
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            pyinstaller --onefile --console Tracker.py
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            pyinstaller --onefile --console Tracker.py
+          fi
 
-      # Step 5: Upload Artifacts
       - name: Upload Executable
         uses: actions/upload-artifact@v3
         with:
           name: Tracker-${{ runner.os }}
-          path: dist/
+          path: |
+            dist/Tracker*
+            kala-network-tracker_*.deb
