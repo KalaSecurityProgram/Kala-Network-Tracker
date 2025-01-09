@@ -14,29 +14,43 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
+      # Step 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      # Step 2: Set Up Python
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
+      # Step 3: Install Dependencies
       - name: Install Dependencies
         run: |
           pip install pyinstaller requests psutil beautifulsoup4
 
+      # Step 4: Build Executable for Each OS
       - name: Build Executable
         run: |
-          if [[ "${{ runner.os }}" == "Linux" ]]; then
+          if [ "${{ runner.os }}" == "Linux" ]; then
             pyinstaller --onefile --console Tracker.py
-            fpm -s dir -t deb -n kala-network-tracker -v 1.0 dist/Tracker=/usr/bin/kala-tracker
-          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            sudo apt-get update
+            sudo apt-get install -y ruby ruby-dev build-essential
+            sudo gem install --no-document fpm
+            fpm -s dir -t deb -n kala-network-tracker -v 1.0 --description "Kala Network Tracker Tool" dist/Tracker=/usr/bin/kala-tracker
+          elif [ "${{ runner.os }}" == "windows-latest" ]; then
             pyinstaller --onefile --console Tracker.py
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          elif [ "${{ runner.os }}" == "macos-latest" ]; then
             pyinstaller --onefile --console Tracker.py
           fi
+          
+      # Step 5: Debug Dist Directory
+      - name: Debug Dist Directory
+        run: |
+          echo "Contents of dist/ directory:"
+          ls -R dist || echo "dist/ not found"
 
+      # Step 6: Upload Artifacts
       - name: Upload Executable
         uses: actions/upload-artifact@v3
         with:
