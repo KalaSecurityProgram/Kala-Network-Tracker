@@ -5,7 +5,7 @@
 ![Kala Network Tracker](https://example.com/banner-image.png)
 
 **Version**: 1.0  
-**Release Date**: *(Insert Release Date)*  
+**Release Date**: *(09/01/2025)*  
 
 The **Kala Network Tracker** is a cutting-edge tool designed to monitor, analyze, and secure networks in real time. With a cyberpunk-inspired command-line interface, it provides an intuitive and powerful experience for network professionals.
 
