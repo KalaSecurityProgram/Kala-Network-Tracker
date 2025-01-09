@@ -33,6 +33,7 @@ jobs:
       - name: Build Executable
         run: |
           pyinstaller --onefile --console Tracker.py
+          ls -l dist/  # List contents of the dist directory for debugging
 
       # Step 5: Upload Artifacts
       - name: Upload Executable
